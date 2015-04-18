@@ -57,9 +57,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Client.Contracts\Client.Contracts.csproj">
-      <Project>{0f206ff9-ab03-4eb6-aa3f-adbc7d497853}</Project>
-      <Name>Client.Contracts</Name>
+    <ProjectReference Include="..\..\Common\Common.DataContracts\Common.DataContracts.csproj">
+      <Project>{3c562316-e53a-4ff9-ac6d-af7cb10b801a}</Project>
+      <Name>Common.DataContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Client.Implementation\Client.Implementation.csproj">
       <Project>{364686a0-9212-405c-9c4e-688cb8ca6a54}</Project>
