@@ -73,6 +73,12 @@
       <Name>Client.Services</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="NLog.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\sdks\StyleCop 4.7\StyleCop.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
