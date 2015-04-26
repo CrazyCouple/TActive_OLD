@@ -26,7 +26,7 @@ namespace DataBaseRepositories
         /// </summary>
         /// <typeparam name="TEntity">Type of repository.</typeparam>
         [SuppressMessage("Microsoft.Reliability", "CA2000:Ликвидировать объекты перед потерей области", Justification = "We don't need it.")]
-        public IRepository<TEntity> CteateRepository<TEntity>() where TEntity : class
+        public IRepository<TEntity> CreateRepository<TEntity>() where TEntity : class
         {
             var context = new TActiveContext();
 

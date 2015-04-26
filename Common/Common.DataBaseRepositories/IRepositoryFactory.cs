@@ -17,6 +17,6 @@ namespace DataBaseRepositories
         /// Creates repositories.
         /// </summary>
         /// <typeparam name="TEntity">Type of repository.</typeparam>
-        IRepository<TEntity> CteateRepository<TEntity>() where TEntity : class;
+        IRepository<TEntity> CreateRepository<TEntity>() where TEntity : class;
     }
 }
