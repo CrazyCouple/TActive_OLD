@@ -4,9 +4,7 @@
 // // <author>Ivan Ivchenko</author>
 // // <author>Myroslava Tarcha</author>
 
-using Common.DataContracts;
-
-namespace DataBaseRepositories
+namespace Common.DatabaseRepositories
 {
     /// <summary>
     /// Creates repositories.

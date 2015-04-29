@@ -7,7 +7,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace DataBaseRepositories
+namespace Common.DatabaseRepositories
 {
     /// <summary>
     /// Wraps data stores exception.
@@ -35,9 +35,9 @@ namespace DataBaseRepositories
         /// Initializes a new instance of the <see cref="RepositoryException"/> class.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        /// <param name="innerExeption">The inner exception</param>
-        public RepositoryException(string message, Exception innerExeption)
-            : base(message, innerExeption)
+        /// <param name="innerException">The inner exception</param>
+        public RepositoryException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
 

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Common.DataContracts;
 
-namespace DataBaseRepositories
+namespace Common.DatabaseRepositories
 {
     /// <summary>
     /// Creates repositories.

@@ -9,12 +9,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using NLog;
 
-namespace DataBaseRepositories
+namespace Common.DatabaseRepositories
 {
     /// <summary>
     /// Provides base methods for working with entities.
@@ -88,7 +87,7 @@ namespace DataBaseRepositories
             }
             catch (Exception ex)
             {
-                const string Message = "Some errore appears during EntityFramework command execution.";
+                const string Message = "Some error appears during EntityFramework command execution.";
                 Logger.ErrorException(Message, ex);
                 throw new RepositoryException(Message, ex);
             }
@@ -117,7 +116,7 @@ namespace DataBaseRepositories
             }
             catch (Exception ex)
             {
-                const string Message = "Some errore appears during EntityFramework command execution.";
+                const string Message = "Some error appears during EntityFramework command execution.";
                 Logger.ErrorException(Message, ex);
                 throw new RepositoryException(Message, ex);
             }
@@ -153,7 +152,7 @@ namespace DataBaseRepositories
             }
             catch (Exception ex)
             {
-                const string Message = "Some errore appears during EntityFramework command execution.";
+                const string Message = "Some error appears during EntityFramework command execution.";
                 Logger.ErrorException(Message, ex);
                 throw new RepositoryException(Message, ex);
             }
@@ -191,7 +190,7 @@ namespace DataBaseRepositories
             }
             catch (Exception ex)
             {
-                const string Message = "Some errore appears during EntityFramework command execution.";
+                const string Message = "Some error appears during EntityFramework command execution.";
                 Logger.ErrorException(Message, ex);
                 throw new RepositoryException(Message, ex);
             }

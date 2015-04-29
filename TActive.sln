@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{086731CE-ADC6-40BC-8249-1E1430BE7C60}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{83FD91E5-F631-4369-ADD5-3B3E7CB57D64}"
@@ -42,7 +44,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Services.Tests", "Cl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Implementation.Tests", "Client\Client.Implementation.Tests\Client.Implementation.Tests.csproj", "{AC4992B9-C1E2-4637-ADE5-2DAFFFF59ABF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.DataBaseRepositories", "Common\Common.DataBaseRepositories\Common.DataBaseRepositories.csproj", "{72BA1E76-7409-43E7-8FF3-6DE5862F8D3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.DatabaseRepositories", "Common\Common.DataBaseRepositories\Common.DatabaseRepositories.csproj", "{72BA1E76-7409-43E7-8FF3-6DE5862F8D3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

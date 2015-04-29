@@ -17,7 +17,7 @@ namespace Common.DataContracts
     [DataContract]
     public class User
     {
-        private readonly Friends _friends;
+        private readonly FriendsCollection _friends;
         private UserProfile _profile;
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Common.DataContracts
         public User(UserProfile profile)
         {
             _profile = profile;
-            _friends = new Friends();
+            _friends = new FriendsCollection();
             Id = Guid.NewGuid();
         }
 
@@ -69,7 +69,7 @@ namespace Common.DataContracts
         /// <value>The users friends.</value>
         [DataMember]
         [NotMapped]
-        public Friends Friends
+        public FriendsCollection Friends
         {
             get
             {

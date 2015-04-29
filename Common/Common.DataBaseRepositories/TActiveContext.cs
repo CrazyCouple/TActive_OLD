@@ -7,7 +7,7 @@
 using System.Data.Entity;
 using Common.DataContracts;
 
-namespace DataBaseRepositories
+namespace Common.DatabaseRepositories
 {
     /// <summary>
     /// Represents here an entities that can be queried from the database, of a given type.

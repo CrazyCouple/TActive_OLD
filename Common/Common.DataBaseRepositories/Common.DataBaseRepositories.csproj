@@ -7,8 +7,8 @@
     <ProjectGuid>{72BA1E76-7409-43E7-8FF3-6DE5862F8D3B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataBaseRepositories</RootNamespace>
-    <AssemblyName>DataBaseRepositories</AssemblyName>
+    <RootNamespace>Common.DatabaseRepositories</RootNamespace>
+    <AssemblyName>Common.DatabaseRepositories</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\DataBaseRepositories.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\Common.DatabaseRepositories.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\..\SolutionItems\TActive.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -33,7 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\DataBaseRepositories.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Common.DatabaseRepositories.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\..\SolutionItems\TActive.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>

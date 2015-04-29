@@ -13,7 +13,7 @@ namespace Common.DataContracts
     /// The collection of users contacts.
     /// </summary>
     [CollectionDataContract]
-    public class Friends : Collection<User>
+    public class FriendsCollection : Collection<User>
     {
     }
 }

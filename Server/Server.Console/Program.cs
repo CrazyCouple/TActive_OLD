@@ -8,7 +8,7 @@ using System;
 using System.Configuration;
 using System.Data.Entity;
 using System.Diagnostics.CodeAnalysis;
-using DataBaseRepositories;
+using Common.DatabaseRepositories;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using NLog;
