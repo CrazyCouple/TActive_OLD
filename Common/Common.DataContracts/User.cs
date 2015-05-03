@@ -1,10 +1,9 @@
-﻿// // <copyright company="Tarcha & Ivchenko Company">
-// //      Copyright (c) 2015, All Right Reserved
-// // </copyright>
-// // <author>Ivan Ivchenko</author>
-// // <author>Myroslava Tarcha</author>
+﻿// <copyright company="Tarcha & Ivchenko Company">
+//      Copyright (c) 2015, All Right Reserved
+// </copyright>
+// <author>Ivan Ivchenko</author>
+// <author>Myroslava Tarcha</author>
 
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
@@ -18,8 +17,10 @@ namespace Common.DataContracts
     public class User
     {
         private readonly FriendsCollection _friends;
+        private long _id;
+        private string _passwordHash;
         private UserProfile _profile;
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="User"/> class.
         /// This constructor we need for DB working.
@@ -32,23 +33,46 @@ namespace Common.DataContracts
         /// Initializes a new instance of the <see cref="User"/> class.
         /// </summary>
         /// <param name="profile">The personal users info.</param>
-        public User(UserProfile profile)
+        /// <param name="id">Users id in DB.</param>
+        public User(UserProfile profile, long id)
         {
             _profile = profile;
             _friends = new FriendsCollection();
-            Id = Guid.NewGuid();
+            _id = id;
         }
 
         /// <summary>
         /// Gets users id.
         /// </summary>
         [Key]
-        public Guid Id { get; private set; }
+        public long Id 
+        {
+            get
+            {
+                return _id;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the hash of entered password.
+        /// </summary>
+        [DataMember]
+        public string PasswordHash
+        {
+            get
+            {
+                return _passwordHash;
+            }
+
+            set
+            {
+                _passwordHash = value;
+            } 
+        }
 
         /// <summary>
         /// Gets or sets a personal info about user.
         /// </summary>
-        /// <value>The users profile.</value>
         [DataMember]
         public UserProfile Profile
         {
@@ -66,7 +90,6 @@ namespace Common.DataContracts
         /// <summary>
         /// Gets the collection of users contacts.
         /// </summary>
-        /// <value>The users friends.</value>
         [DataMember]
         [NotMapped]
         public FriendsCollection Friends
@@ -75,15 +98,6 @@ namespace Common.DataContracts
             {
                 return _friends;
             }
-        }
-
-        /// <summary>
-        /// Adds a new contact to users friends.
-        /// </summary>
-        /// <param name="friend">Other user.</param>
-        public void AddFriend(User friend)
-        {
-            _friends.Add(friend);
         }
     }
 }

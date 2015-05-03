@@ -82,13 +82,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.DataContracts\Common.DataContracts.csproj">
-      <Project>{3c562316-e53a-4ff9-ac6d-af7cb10b801a}</Project>
-      <Name>Common.DataContracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.DataBaseRepositories\Common.DatabaseRepositories.csproj">
       <Project>{72ba1e76-7409-43e7-8ff3-6de5862f8d3b}</Project>
       <Name>Common.DatabaseRepositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.DataContracts\Common.DataContracts.csproj">
+      <Project>{3c562316-e53a-4ff9-ac6d-af7cb10b801a}</Project>
+      <Name>Common.DataContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Server.Implementation\Server.Implementation.csproj">
       <Project>{6e638329-21ea-497b-89e7-2386ab570fa7}</Project>

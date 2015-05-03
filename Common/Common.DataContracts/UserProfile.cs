@@ -1,11 +1,11 @@
-﻿// // <copyright company="Tarcha & Ivchenko Company">
-// //      Copyright (c) 2015, All Right Reserved
-// // </copyright>
-// // <author>Ivan Ivchenko</author>
-// // <author>Myroslava Tarcha</author>
+﻿// <copyright company="Tarcha & Ivchenko Company">
+//      Copyright (c) 2015, All Right Reserved
+// </copyright>
+// <author>Ivan Ivchenko</author>
+// <author>Myroslava Tarcha</author>
 
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace Common.DataContracts
@@ -21,20 +21,13 @@ namespace Common.DataContracts
         /// </summary>
         /// <value>The name of the user.</value>
         [DataMember]
+        [Key]
         public string AccountName { get; set; }
 
         /// <summary>
-        /// Gets or sets the hash of entered password.
+        /// Gets or sets a users Birthday.
         /// </summary>
-        /// <value>The users password hash.</value>
         [DataMember]
-        public int PasswordHash { get; set; }
-
-        /// <summary>
-        /// Gets or sets a users age.
-        /// </summary>
-        /// <value>The users age.</value>
-        [DataMember]
-        public int Age { get; set; }
+        public DateTime Birthday { get; set; }
     }
 }
