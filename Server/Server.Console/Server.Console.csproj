@@ -41,6 +41,12 @@
     <CodeAnalysisRuleSet>..\..\SolutionItems\TActive.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\sdks\EntityFramework\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\sdks\EntityFramework\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\..\sdks\Unity\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
@@ -76,6 +82,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.DataBaseRepositories\Common.DatabaseRepositories.csproj">
+      <Project>{72ba1e76-7409-43e7-8ff3-6de5862f8d3b}</Project>
+      <Name>Common.DatabaseRepositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.DataContracts\Common.DataContracts.csproj">
       <Project>{3c562316-e53a-4ff9-ac6d-af7cb10b801a}</Project>
       <Name>Common.DataContracts</Name>

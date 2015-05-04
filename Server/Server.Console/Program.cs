@@ -6,7 +6,9 @@
 
 using System;
 using System.Configuration;
+using System.Data.Entity;
 using System.Diagnostics.CodeAnalysis;
+using Common.DatabaseRepositories;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using NLog;
@@ -27,6 +29,8 @@ namespace Server.Console
         /// </summary>
         public static void Main()
         {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TActiveContext>());
+
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
 
             using (var container = CreateUnityContainer())
