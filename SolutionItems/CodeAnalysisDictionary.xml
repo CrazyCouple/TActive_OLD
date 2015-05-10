@@ -3,11 +3,13 @@
   <Words>
     <Recognized>
       <Word>EntityFramework</Word>
+      <Word>Ioc</Word>
     </Recognized>
   </Words>
   <Acronyms>
     <CasingExceptions>
       <Acronym>Db</Acronym>
+      <Acronym>WCF</Acronym>
     </CasingExceptions>
   </Acronyms>
 </Dictionary>

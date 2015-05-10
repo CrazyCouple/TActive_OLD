@@ -10,7 +10,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using Microsoft.Practices.Unity;
 
-namespace Server.Implementation
+namespace Common.Implementation.IocInWCF
 {
     /// <summary>
     /// By default WCF requires that service implementation classes have a constructor without parameters. 
@@ -25,7 +25,7 @@ namespace Server.Implementation
         /// <summary>
         /// Initializes a new instance of the <see cref="UnityInstanceProvider"/> class.
         /// </summary>
-        /// <param name="container">The IoC container</param>
+        /// <param name="container">The IoC container.</param>
         /// <param name="serviceType">The service type.</param>
         public UnityInstanceProvider(UnityContainer container, Type serviceType)
         {
