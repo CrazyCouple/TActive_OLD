@@ -47,20 +47,10 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\..\sdks\EntityFramework\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\..\sdks\Unity\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration">
-      <HintPath>..\..\sdks\Unity\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
-      <HintPath>..\..\sdks\Unity\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
-    </Reference>
     <Reference Include="NLog">
       <HintPath>..\..\sdks\NLog\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -75,9 +65,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="NLog.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Unity.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
