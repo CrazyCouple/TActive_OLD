@@ -64,11 +64,16 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityContainerHolder.cs" />
+    <Compile Include="UnityServiceBehaviorExtensionElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Common.DataContracts\Common.DataContracts.csproj">
       <Project>{3c562316-e53a-4ff9-ac6d-af7cb10b801a}</Project>
       <Name>Common.DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Implementation\Common.Implementation.csproj">
+      <Project>{3AA54AEF-F4EF-4A63-A415-E1B96DD06D73}</Project>
+      <Name>Common.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
