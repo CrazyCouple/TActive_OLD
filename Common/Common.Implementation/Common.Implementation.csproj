@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hash\IHashCalculator.cs" />
+    <Compile Include="Hash\MD5HashCalculator.cs" />
     <Compile Include="IocInWCF\UnityInstanceProvider.cs" />
     <Compile Include="IocInWCF\UnityServiceBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
