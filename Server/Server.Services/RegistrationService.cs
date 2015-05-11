@@ -104,7 +104,7 @@ namespace Server.Services
             }
 
             var userWithSameAccountName = _userRepository.FindBy(x => x.Profile.AccountName.Equals(accountName));
-            if (userWithSameAccountName != null)
+            if (userWithSameAccountName.FirstOrDefault() != null)
             {
                 throw new ArgumentException("User with same account name already exist.");
             }

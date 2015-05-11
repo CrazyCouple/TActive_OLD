@@ -19,7 +19,8 @@ namespace Common.DataContracts
         /// </summary>
         /// <param name="accountName">An account name of user.</param>
         /// <param name="password">The users password.</param>
+        /// <param name="isAdmin"> Indicates whether have to be user or not an administrator.</param>
         [OperationContract]
-        void Register(string accountName, string password);
+        void Register(string accountName, string password, bool isAdmin);
     }
 }
