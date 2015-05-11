@@ -20,6 +20,7 @@ namespace Common.DataContracts
         private long _id;
         private string _passwordHash;
         private UserProfile _profile;
+        private bool _isAdmin;
         
         /// <summary>
         /// Initializes a new instance of the <see cref="User"/> class.
@@ -68,6 +69,23 @@ namespace Common.DataContracts
             {
                 _passwordHash = value;
             } 
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether is user or not an administrator.
+        /// </summary>
+        [DataMember]
+        public bool IsAdmin
+        {
+            get
+            {
+                return _isAdmin;
+            }
+
+            set
+            {
+                _isAdmin = value;
+            }
         }
 
         /// <summary>
