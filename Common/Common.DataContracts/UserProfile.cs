@@ -6,6 +6,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace Common.DataContracts
@@ -28,6 +29,7 @@ namespace Common.DataContracts
         /// Gets or sets a users Birthday.
         /// </summary>
         [DataMember]
+        [Column(TypeName = "DateTime2")]
         public DateTime Birthday { get; set; }
     }
 }
