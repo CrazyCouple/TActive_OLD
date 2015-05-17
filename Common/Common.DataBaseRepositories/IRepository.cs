@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 
 namespace Common.DatabaseRepositories
 {
@@ -40,6 +41,7 @@ namespace Common.DatabaseRepositories
         /// </summary>
         /// <param name="predicate">Predicate for searching.</param>
         /// <returns>The list of requested elements that returns true for predicate.</returns>
-        IEnumerable<TEntity> FindBy(Func<TEntity, bool> predicate);
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "LINQ to entities need Expression, we can not wrapp func to expression - LINQ will throw exception during execution.")]
+        IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate);
     }
 }

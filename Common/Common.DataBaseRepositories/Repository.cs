@@ -104,7 +104,7 @@ namespace Common.DatabaseRepositories
         /// Gets all entities by predicate.
         /// </summary>
         /// <param name="predicate">Predicate for searching.</param>
-        public IEnumerable<TEntity> FindBy(Func<TEntity, bool> predicate)
+        public IEnumerable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)
         {
             ThrowIfDisposed();
 
@@ -112,11 +112,9 @@ namespace Common.DatabaseRepositories
             {
                 throw new ArgumentNullException("predicate");
             }
-
-            Expression<Func<TEntity, bool>> exp = (x) => predicate(x); // TODO: Invesgtigate Expression and Func performance - Database or RAM.
-
+            
             // TODO: Write a unit test to see what works faster:  GetAll().Where(predicate) or string below.
-            return ExecuteAndHandleDbExceptions(() => _context.Set<TEntity>().Where(exp));
+            return ExecuteAndHandleDbExceptions(() => _context.Set<TEntity>().Where(predicate));
         }
 
         /// <summary>
