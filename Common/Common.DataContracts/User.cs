@@ -43,7 +43,7 @@ namespace Common.DataContracts
         }
 
         /// <summary>
-        /// Gets users id.
+        /// Gets or sets users id.
         /// </summary>
         [Key]
         public long Id 
@@ -51,6 +51,12 @@ namespace Common.DataContracts
             get
             {
                 return _id;
+            }
+
+            // We need it for DB mapping.
+            set
+            {
+                _id = value;
             }
         }
 
