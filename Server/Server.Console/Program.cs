@@ -6,8 +6,14 @@
 
 using System;
 using System.Data.Entity;
+using System.ServiceModel;
+using System.ServiceModel.Description;
 using Common.DatabaseRepositories;
+using Common.Implementation.IocInWCF;
+using Microsoft.Practices.Unity;
 using NLog;
+using Server.Implementation;
+using Server.Services;
 
 namespace Server.Console
 {
@@ -26,6 +32,16 @@ namespace Server.Console
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TActiveContext>());
 
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+
+            var container = UnityContainerHolder.UnityContainer;
+            container.RegisterType<IServiceBehavior, UnityServiceBehavior>();
+
+            using (var host = new ServiceHost(typeof(RegistrationService)))
+            {
+                host.Open();
+
+                System.Console.ReadLine();
+            }
 
             LogManager.Flush();
         }
