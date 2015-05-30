@@ -22,7 +22,6 @@ namespace Common.DataContracts
         /// </summary>
         /// <value>The name of the user.</value>
         [DataMember]
-        [Key]
         public string AccountName { get; set; }
 
         /// <summary>
