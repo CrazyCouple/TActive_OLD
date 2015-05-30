@@ -5,7 +5,12 @@
 // <author>Myroslava Tarcha</author>
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Principal;
+using System.ServiceModel;
+using Common.DatabaseRepositories;
+using Common.DataContracts;
+using Microsoft.Practices.Unity;
 
 namespace Server.Implementation
 {
@@ -15,12 +20,8 @@ namespace Server.Implementation
     public class CustomPrincipal : IPrincipal
     {
         private readonly IIdentity _identity;
-        private readonly List<string> _roles = new List<string>
-                                                      {
-                                                          "Administrator",
-                                                          "User",
-                                                          "Anonymous"
-                                                      };
+
+        private readonly List<string> _roles = new List<string>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomPrincipal"/> class.
@@ -45,6 +46,21 @@ namespace Server.Implementation
         /// <param name="role">The name of the role for which to check membership.</param>
         public bool IsInRole(string role)
         {
+            var accountName = _identity.Name;
+            var container = UnityContainerHolder.UnityContainer;
+            var userRepository = container.Resolve<IRepositoryFactory>().CreateRepository<User>();
+            var userWithSameAccountName = userRepository.FindBy(x => x.Profile.AccountName.Equals(accountName)).Single();
+
+            if (_identity.IsAuthenticated)
+            {
+                _roles.Add("User");
+            }
+
+            if (userWithSameAccountName.IsAdmin)
+            {
+                _roles.Add("Administrator");
+            }
+
             return _roles.Contains(role);
         }
     }
