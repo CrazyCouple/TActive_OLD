@@ -18,8 +18,10 @@ namespace Common.DataContracts
     {
         private readonly FriendsCollection _friends;
         private long _id;
+        private string _accountName;
         private string _passwordHash;
         private UserProfile _profile;
+        private bool _isAdmin;
         
         /// <summary>
         /// Initializes a new instance of the <see cref="User"/> class.
@@ -27,29 +29,52 @@ namespace Common.DataContracts
         /// </summary>
         public User()
         {
+            _friends = new FriendsCollection();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="User"/> class.
         /// </summary>
-        /// <param name="profile">The personal users info.</param>
-        /// <param name="id">Users id in DB.</param>
-        public User(UserProfile profile, long id)
+        /// <param name="accountName">The account name.</param>
+        public User(string accountName)
+            : this()
         {
-            _profile = profile;
-            _friends = new FriendsCollection();
-            _id = id;
+            _accountName = accountName;
         }
 
         /// <summary>
-        /// Gets users id.
+        /// Gets or sets users id.
         /// </summary>
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id 
         {
             get
             {
                 return _id;
+            }
+
+            // We need it for DB mapping.
+            set
+            {
+                _id = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets an account name of user.
+        /// </summary>
+        /// <value>The name of the user.</value>
+        [DataMember]
+        public string AccountName
+        {
+            get
+            {
+                return _accountName;
+            }
+
+            set
+            {
+                _accountName = value;
             }
         }
 
@@ -68,6 +93,23 @@ namespace Common.DataContracts
             {
                 _passwordHash = value;
             } 
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether user is an administrator or not.
+        /// </summary>
+        [DataMember]
+        public bool IsAdmin
+        {
+            get
+            {
+                return _isAdmin;
+            }
+
+            set
+            {
+                _isAdmin = value;
+            }
         }
 
         /// <summary>

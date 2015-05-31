@@ -8,10 +8,13 @@ using System;
 using System.Configuration;
 using System.Data.Entity;
 using System.Diagnostics.CodeAnalysis;
+using System.ServiceModel;
 using Common.DatabaseRepositories;
+using Common.Implementation.IocInWCF;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using NLog;
+using Server.Services;
 
 namespace Server.Console
 {
@@ -21,7 +24,6 @@ namespace Server.Console
     public static class Program
     {
         private const string UnityContainerFile = "Unity.config";
-
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
@@ -29,12 +31,20 @@ namespace Server.Console
         /// </summary>
         public static void Main()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TActiveContext>());
-
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TActiveContext>());
 
             using (var container = CreateUnityContainer())
             {
+                UnityContainerHolder.Initialize(container);
+
+                using (var host = new ServiceHost(typeof(RegistrationService)))
+                {
+                    host.Open();
+
+                    System.Console.ReadLine();
+                }
             }
 
             LogManager.Flush();
@@ -44,9 +54,9 @@ namespace Server.Console
         private static UnityContainer CreateUnityContainer()
         {
             var fileMap = new ExeConfigurationFileMap
-            {
-                ExeConfigFilename = UnityContainerFile
-            };
+                          {
+                              ExeConfigFilename = UnityContainerFile
+                          };
 
             var configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
             var unitySection = (UnityConfigurationSection)configuration.GetSection("unity");

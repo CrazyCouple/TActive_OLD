@@ -5,7 +5,7 @@
 // <author>Myroslava Tarcha</author>
 
 using System;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace Common.DataContracts
@@ -17,17 +17,10 @@ namespace Common.DataContracts
     public class UserProfile
     {
         /// <summary>
-        /// Gets or sets an account name of user.
-        /// </summary>
-        /// <value>The name of the user.</value>
-        [DataMember]
-        [Key]
-        public string AccountName { get; set; }
-
-        /// <summary>
         /// Gets or sets a users Birthday.
         /// </summary>
         [DataMember]
+        [Column(TypeName = "DateTime2")]
         public DateTime Birthday { get; set; }
     }
 }

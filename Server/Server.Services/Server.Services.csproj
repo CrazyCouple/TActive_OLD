@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,12 +52,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRegistrationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.DataBaseRepositories\Common.DatabaseRepositories.csproj">
+      <Project>{72ba1e76-7409-43e7-8ff3-6de5862f8d3b}</Project>
+      <Name>Common.DatabaseRepositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.DataContracts\Common.DataContracts.csproj">
       <Project>{3c562316-e53a-4ff9-ac6d-af7cb10b801a}</Project>
       <Name>Common.DataContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Implementation\Common.Implementation.csproj">
+      <Project>{3AA54AEF-F4EF-4A63-A415-E1B96DD06D73}</Project>
+      <Name>Common.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
