@@ -4,79 +4,66 @@
 // <author>Ivan Ivchenko</author>
 // <author>Myroslava Tarcha</author>
 
+using System;
 using System.Security.Cryptography;
 
 namespace Common.Implementation.Hash
 {
     /// <summary>
-    /// Creates hash from string or byte array.
-    /// Provides a hash manipulation methods. 
+    /// Calculates MD5 hash from string or byte array.
     /// </summary>
-    public class MD5HashCalculator : IHashCalculator
+    public sealed class MD5HashCalculator : IHashCalculator
     {
         private readonly MD5 _md5Algorithm;
+        private bool _disposed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MD5HashCalculator"/> class.
         /// </summary>
         public MD5HashCalculator()
         {
-            _md5Algorithm = MD5.Create();
+            _md5Algorithm = new MD5Cng();
         }
 
         /// <summary>
         /// Creates hash from byte array.
         /// </summary>
         /// <param name="buffer">Input data.</param>
-        /// <returns></returns>
-        public byte[] ComputeHashFromBytes(byte[] buffer)
+        public IHash Compute(byte[] buffer)
         {
-            return _md5Algorithm.ComputeHash(buffer);
+            ThrowIfDisposed();
+
+            return new MD5Hash(_md5Algorithm.ComputeHash(buffer));
         }
 
         /// <summary>
         /// Creates hash from string.
         /// </summary>
         /// <param name="input">Input data.</param>
-        /// <returns></returns>
-        public byte[] ComputeHashFromString(string input)
+        public IHash Compute(string input)
         {
-            var buffer = GetBytes(input);
-            return _md5Algorithm.ComputeHash(buffer);
+            ThrowIfDisposed();
+
+            var buffer = System.Text.Encoding.ASCII.GetBytes(input);
+            return new MD5Hash(_md5Algorithm.ComputeHash(buffer));
         }
 
         /// <summary>
-        /// Converts hash to string.
+        /// Disposes the object.
         /// </summary>
-        /// <param name="hash">The hash.</param>
-        /// <returns></returns>
-        public string StringRepresentation(byte[] hash)
+        public void Dispose()
         {
-            return GetString(hash);
+            _md5Algorithm.Dispose();
+
+            _disposed = true;
         }
 
-        /// <summary>
-        /// Converts hash to byte array.
-        /// </summary>
-        /// <param name="hash">The hash.</param>
-        /// <returns></returns>
-        public byte[] ByteArrayRepresentation(string hash)
+        private void ThrowIfDisposed()
         {
-            return GetBytes(hash);
-        }
-
-        private static byte[] GetBytes(string str)
-        {
-            var bytes = new byte[str.Length * sizeof(char)];
-            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-            return bytes;
-        }
-
-        private static string GetString(byte[] bytes)
-        {
-            var chars = new char[bytes.Length / sizeof(char)];
-            System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
-            return new string(chars);
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
+            }
         }
     }
 }

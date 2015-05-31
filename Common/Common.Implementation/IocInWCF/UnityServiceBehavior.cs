@@ -81,8 +81,7 @@ namespace Common.Implementation.IocInWCF
                     foreach (var ed in cd.Endpoints)
                     {
                         var serviceType = serviceDescription.ServiceType;
-                        IInstanceProvider provider = new UnityInstanceProvider(_container, serviceType);
-                        ed.DispatchRuntime.InstanceProvider = provider;
+                        ed.DispatchRuntime.InstanceProvider = new UnityInstanceProvider(_container, serviceType);
                     }
                 }
             }

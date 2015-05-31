@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.Security.Principal;
+using System.ServiceModel;
 
 namespace Server.Implementation
 {
@@ -41,10 +42,9 @@ namespace Server.Implementation
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "TODO")]
         public bool Evaluate(EvaluationContext evaluationContext, ref object state)
         {
-            //// get the authenticated client identity
-            IIdentity client = GetClientIdentity(evaluationContext);
+            var client = GetClientIdentity(evaluationContext);
 
-            //// set the custom principal
+            // set the custom principal
             evaluationContext.Properties["Principal"] = new CustomPrincipal(client);
             return true;
         }
@@ -55,13 +55,18 @@ namespace Server.Implementation
             object obj;
             if (!evaluationContext.Properties.TryGetValue("Identities", out obj))
             {
-                throw new Exception("No Identity found");
+                return ServiceSecurityContext.Anonymous.PrimaryIdentity;
             }
 
             var identities = obj as IList<IIdentity>;
             if (identities == null || identities.Count <= 0)
             {
-                throw new Exception("No Identity found");
+                return ServiceSecurityContext.Anonymous.PrimaryIdentity;
+            }
+
+            if (identities[0].Name.Equals("Anonymous", StringComparison.OrdinalIgnoreCase))
+            {
+                return ServiceSecurityContext.Anonymous.PrimaryIdentity;
             }
 
             return identities[0];

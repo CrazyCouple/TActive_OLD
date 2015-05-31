@@ -6,9 +6,8 @@
 
 using System;
 using System.ServiceModel.Configuration;
-using Common.Implementation.IocInWCF;
 
-namespace Server.Implementation
+namespace Common.Implementation.IocInWCF
 {
     /// <summary>
     /// Configuration element.

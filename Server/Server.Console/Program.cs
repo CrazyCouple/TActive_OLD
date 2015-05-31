@@ -5,14 +5,15 @@
 // <author>Myroslava Tarcha</author>
 
 using System;
+using System.Configuration;
 using System.Data.Entity;
+using System.Diagnostics.CodeAnalysis;
 using System.ServiceModel;
-using System.ServiceModel.Description;
 using Common.DatabaseRepositories;
 using Common.Implementation.IocInWCF;
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.Configuration;
 using NLog;
-using Server.Implementation;
 using Server.Services;
 
 namespace Server.Console
@@ -22,6 +23,7 @@ namespace Server.Console
     /// </summary>
     public static class Program
     {
+        private const string UnityContainerFile = "Unity.config";
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
@@ -29,21 +31,40 @@ namespace Server.Console
         /// </summary>
         public static void Main()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TActiveContext>());
-
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
 
-            var container = UnityContainerHolder.UnityContainer;
-            container.RegisterType<IServiceBehavior, UnityServiceBehavior>();
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<TActiveContext>());
 
-            using (var host = new ServiceHost(typeof(RegistrationService)))
+            using (var container = CreateUnityContainer())
             {
-                host.Open();
+                UnityContainerHolder.Initialize(container);
 
-                System.Console.ReadLine();
+                using (var host = new ServiceHost(typeof(RegistrationService)))
+                {
+                    host.Open();
+
+                    System.Console.ReadLine();
+                }
             }
 
             LogManager.Flush();
+        }
+
+        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The container must be disposed in external code.")]
+        private static UnityContainer CreateUnityContainer()
+        {
+            var fileMap = new ExeConfigurationFileMap
+                          {
+                              ExeConfigFilename = UnityContainerFile
+                          };
+
+            var configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+            var unitySection = (UnityConfigurationSection)configuration.GetSection("unity");
+
+            var container = new UnityContainer();
+            container.LoadConfiguration(unitySection);
+
+            return container;
         }
 
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)

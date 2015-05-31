@@ -6,7 +6,7 @@
 
 using System.ServiceModel;
 
-namespace Common.DataContracts
+namespace Server.Services
 {
     /// <summary>
     /// Service that registers new user in the system.
@@ -17,9 +17,9 @@ namespace Common.DataContracts
         /// <summary>
         /// Registers new user in the system.
         /// </summary>
-        /// <param name="accountName">An account name of user.</param>
-        /// <param name="password">The users password.</param>
-        /// <param name="isAdmin"> Indicates whether have to be user or not an administrator.</param>
+        /// <param name="accountName">An account name of the user.</param>
+        /// <param name="password">The user's password.</param>
+        /// <param name="isAdmin">Indicates whether user is an administrator or not.</param>
         [OperationContract]
         void Register(string accountName, string password, bool isAdmin);
     }

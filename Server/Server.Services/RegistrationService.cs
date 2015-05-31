@@ -5,10 +5,7 @@
 // <author>Myroslava Tarcha</author>
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Security.Authentication;
-using System.Security.Principal;
 using System.Threading;
 using Common.DatabaseRepositories;
 using Common.DataContracts;
@@ -30,9 +27,18 @@ namespace Server.Services
         /// </summary>
         /// <param name="repositoryFactory">Creates repositories.</param>
         /// <param name="hashCalculator">The hash calculator.</param>
-        [SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "We get it from IoC container.")]
         public RegistrationService(IRepositoryFactory repositoryFactory, IHashCalculator hashCalculator)
         {
+            if (repositoryFactory == null)
+            {
+                throw new ArgumentNullException("repositoryFactory");
+            }
+
+            if (hashCalculator == null)
+            {
+                throw new ArgumentNullException("hashCalculator");
+            }
+
             _userRepository = repositoryFactory.CreateRepository<User>();
             _hashCalculator = hashCalculator;
         }
@@ -42,10 +48,8 @@ namespace Server.Services
         /// </summary>
         public void Register(string accountName, string password, bool isAdmin)
         {
-            var currentPrincipal = Thread.CurrentPrincipal;
-            ValidatePrincipal(currentPrincipal);
+            var principalIsAdmin = Thread.CurrentPrincipal.IsInRole("Administrator");
 
-            var principalIsAdmin = currentPrincipal.IsInRole("Administrator");
             if (isAdmin && !principalIsAdmin)
             {
                 throw new InvalidOperationException("Only administrator can register new administrator.");
@@ -56,57 +60,37 @@ namespace Server.Services
             var user = CreateUser(accountName, password, isAdmin);
             _userRepository.Add(user);
         }
-
-        private static void ValidatePrincipal(IPrincipal currentPrincipal)
-        {
-            if (currentPrincipal == null)
-            {
-                throw new ArgumentNullException("currentPrincipal");
-            }
-
-            if (!currentPrincipal.Identity.IsAuthenticated)
-            {
-                throw new AuthenticationException("Can not execute operation for unauthenticated identity.");
-            }
-        }
-
+     
         private User CreateUser(string accountName, string password, bool isAdmin)
         {
-            var passwordHash = _hashCalculator.ComputeHashFromString(password);
-            var userProfile = new UserProfile { AccountName = accountName };
-            var lastAddedUser = _userRepository.GetAll().OrderByDescending(x => x.Id).FirstOrDefault();
-            var id = lastAddedUser == null ? 1 : lastAddedUser.Id + 1;
-
-            var user = new User(userProfile, id)
-                       {
-                           PasswordHash = _hashCalculator.StringRepresentation(passwordHash),
-                           IsAdmin = isAdmin
-                       };
-
-            return user;
+            return new User(accountName)
+                   {
+                       PasswordHash = _hashCalculator.Compute(password).ToString(),
+                       IsAdmin = isAdmin
+                   };
         }
 
         private void ValidateCredentials(string accountName, string password)
         {
-            if (string.IsNullOrEmpty(accountName))
+            if (string.IsNullOrWhiteSpace(accountName))
             {
                 throw new ArgumentNullException("accountName");
             }
 
-            if (string.IsNullOrEmpty(password))
+            if (string.IsNullOrWhiteSpace(password))
             {
                 throw new ArgumentNullException("password");
             }
 
             if (password.Length < MinPasswordLength)
             {
-                throw new ArgumentException("Password length can not be less then 6 characters.");
+                throw new ArgumentException(string.Format("Password length can not be less then {0} characters.", MinPasswordLength));
             }
 
-            var userWithSameAccountName = _userRepository.FindBy(x => x.Profile.AccountName.Equals(accountName));
-            if (userWithSameAccountName.FirstOrDefault() != null)
+            var userWithSameAccountName = _userRepository.FindBy(x => x.AccountName.Equals(accountName, StringComparison.OrdinalIgnoreCase));
+            if (userWithSameAccountName.Any())
             {
-                throw new ArgumentException("User with same account name already exist.");
+                throw new ArgumentException(string.Format("User with account name = {0} already exist.", accountName));
             }
         }
     }

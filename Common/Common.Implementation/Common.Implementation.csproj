@@ -46,6 +46,7 @@
       <HintPath>..\..\sdks\NLog\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
@@ -55,10 +56,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hash\IHash.cs" />
     <Compile Include="Hash\IHashCalculator.cs" />
+    <Compile Include="Hash\MD5Hash.cs" />
     <Compile Include="Hash\MD5HashCalculator.cs" />
+    <Compile Include="IocInWCF\UnityContainerHolder.cs" />
     <Compile Include="IocInWCF\UnityInstanceProvider.cs" />
     <Compile Include="IocInWCF\UnityServiceBehavior.cs" />
+    <Compile Include="IocInWCF\UnityServiceBehaviorExtensionElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

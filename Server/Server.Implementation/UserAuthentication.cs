@@ -11,6 +11,7 @@ using System.ServiceModel;
 using Common.DatabaseRepositories;
 using Common.DataContracts;
 using Common.Implementation.Hash;
+using Common.Implementation.IocInWCF;
 using Microsoft.Practices.Unity;
 
 namespace Server.Implementation
@@ -29,11 +30,17 @@ namespace Server.Implementation
         {
             try
             {
+                if (string.IsNullOrEmpty(userName) || userName.Equals("Anonymous"))
+                {
+                    // Allow anonymous access here.
+                    return;
+                }
+
                 var container = UnityContainerHolder.UnityContainer;
                 var repositoryFactory = container.Resolve<IRepositoryFactory>();
                 var userRepository = repositoryFactory.CreateRepository<User>();
 
-                var user = userRepository.FindBy(x => x.Profile.AccountName.Equals(userName, StringComparison.OrdinalIgnoreCase)).Single();
+                var user = userRepository.FindBy(x => x.AccountName.Equals(userName, StringComparison.OrdinalIgnoreCase)).Single();
 
                 if (user == null)
                 {
@@ -41,9 +48,8 @@ namespace Server.Implementation
                 }
 
                 var hashCalculator = container.Resolve<IHashCalculator>();
-                var passwordHash = hashCalculator.ComputeHashFromString(password);
 
-                if (!user.PasswordHash.Equals(hashCalculator.StringRepresentation(passwordHash)))
+                if (!user.PasswordHash.Equals(hashCalculator.Compute(password).ToString()))
                 {
                     throw new FaultException("Unknown Username or Incorrect Password");
                 }
