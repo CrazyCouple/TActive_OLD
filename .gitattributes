@@ -1,0 +1,8 @@
+*.cs	    eol=crlf
+*.csproj    eol=crlf
+*.sln       eol=crlf
+*.config    eol=crlf
+*.xml	    eol=crlf
+*.xaml	    eol=crlf
+*.bat       eol=crlf
+*.ico       -text
