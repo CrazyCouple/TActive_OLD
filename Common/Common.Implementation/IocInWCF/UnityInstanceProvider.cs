@@ -8,6 +8,7 @@ using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
+using Common.Implementation.Extensions;
 using Microsoft.Practices.Unity;
 
 namespace Common.Implementation.IocInWCF
@@ -29,16 +30,9 @@ namespace Common.Implementation.IocInWCF
         /// <param name="serviceType">The service type.</param>
         public UnityInstanceProvider(UnityContainer container, Type serviceType)
         {
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
-
-            if (serviceType == null)
-            {
-                throw new ArgumentNullException("serviceType");
-            }
-
+            container.ValidateNull("container");
+            serviceType.ValidateNull("serviceType");
+            
             _serviceType = serviceType;
             _container = container;
         }

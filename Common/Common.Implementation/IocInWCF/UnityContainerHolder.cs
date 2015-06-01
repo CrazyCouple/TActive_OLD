@@ -5,6 +5,7 @@
 // <author>Myroslava Tarcha</author>
 
 using System;
+using Common.Implementation.Extensions;
 using Microsoft.Practices.Unity;
 
 namespace Common.Implementation.IocInWCF
@@ -37,10 +38,7 @@ namespace Common.Implementation.IocInWCF
         /// </summary>
         public static void Initialize(UnityContainer container)
         {
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
+            container.ValidateNull("container");
 
             _container = container;
         }

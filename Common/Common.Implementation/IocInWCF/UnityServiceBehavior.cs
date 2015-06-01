@@ -4,12 +4,12 @@
 // <author>Ivan Ivchenko</author>
 // <author>Myroslava Tarcha</author>
 
-using System;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
+using Common.Implementation.Extensions;
 using Microsoft.Practices.Unity;
 
 namespace Common.Implementation.IocInWCF
@@ -27,6 +27,8 @@ namespace Common.Implementation.IocInWCF
         /// <param name="container">The IoC container.</param>
         public UnityServiceBehavior(UnityContainer container)
         {
+            container.ValidateNull("container");
+
             _container = container;
         }
 
@@ -38,15 +40,8 @@ namespace Common.Implementation.IocInWCF
         /// <param name="serviceHostBase">The service host that is currently being constructed.</param>
         public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
-            if (serviceDescription == null)
-            {
-                throw new ArgumentNullException("serviceDescription");
-            }
-
-            if (serviceHostBase == null)
-            {
-                throw new ArgumentNullException("serviceHostBase");
-            }
+            serviceDescription.ValidateNull("serviceDescription");
+            serviceHostBase.ValidateNull("serviceHostBase");
         }
 
         /// <summary>

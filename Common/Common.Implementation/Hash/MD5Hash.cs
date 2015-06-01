@@ -7,6 +7,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using Common.Implementation.Extensions;
 
 namespace Common.Implementation.Hash
 {
@@ -25,10 +26,7 @@ namespace Common.Implementation.Hash
         /// <param name="hash">Byte representation of the MD5 hash.</param>
         public MD5Hash(byte[] hash)
         {
-            if (hash == null)
-            {
-                throw new ArgumentNullException("hash");
-            }
+            hash.ValidateNull("hash");
 
             if (hash.Length != MD5HahsLength)
             {
@@ -44,10 +42,7 @@ namespace Common.Implementation.Hash
         /// <param name="hash">String representation of the MD5 hash.</param>
         public MD5Hash(string hash)
         {
-            if (hash == null)
-            {
-                throw new ArgumentNullException("hash");
-            }
+            hash.ValidateEmpty("hash");
 
             if (hash.Length != MD5HahsLength * 2)
             {

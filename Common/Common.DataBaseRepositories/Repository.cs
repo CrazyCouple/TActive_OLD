@@ -10,6 +10,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
+using Common.Implementation.Extensions;
 using NLog;
 
 namespace Common.DatabaseRepositories
@@ -35,10 +36,7 @@ namespace Common.DatabaseRepositories
         /// <param name="context">The DBContext.</param>
         public Repository(TContext context)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
+            context.ValidateNull("context");
 
             _context = context;
             _name = GetType() + "[" + typeof(TEntity) + ", " + typeof(TContext) + "]";
@@ -53,10 +51,7 @@ namespace Common.DatabaseRepositories
         {
             ThrowIfDisposed();
 
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
+            entity.ValidateNull("entity");
 
             ExecuteAndHandleDbExceptions(() =>
                                {
@@ -74,10 +69,7 @@ namespace Common.DatabaseRepositories
         {
             ThrowIfDisposed();
 
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
+            entity.ValidateNull("entity");
 
             ExecuteAndHandleDbExceptions(() =>
                                {
@@ -108,10 +100,7 @@ namespace Common.DatabaseRepositories
         {
             ThrowIfDisposed();
 
-            if (predicate == null)
-            {
-                throw new ArgumentNullException("predicate");
-            }
+            predicate.ValidateNull("predicate");
             
             // TODO: Write a unit test to see what works faster:  GetAll().Where(predicate) or string below.
             return ExecuteAndHandleDbExceptions(() => _context.Set<TEntity>().Where(predicate));

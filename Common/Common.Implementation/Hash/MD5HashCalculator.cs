@@ -6,6 +6,7 @@
 
 using System;
 using System.Security.Cryptography;
+using Common.Implementation.Extensions;
 
 namespace Common.Implementation.Hash
 {
@@ -33,6 +34,8 @@ namespace Common.Implementation.Hash
         {
             ThrowIfDisposed();
 
+            buffer.ValidateNull("buffer");
+
             return new MD5Hash(_md5Algorithm.ComputeHash(buffer));
         }
 
@@ -43,6 +46,8 @@ namespace Common.Implementation.Hash
         public IHash Compute(string input)
         {
             ThrowIfDisposed();
+
+            input.ValidateEmpty("input");
 
             var buffer = System.Text.Encoding.ASCII.GetBytes(input);
             return new MD5Hash(_md5Algorithm.ComputeHash(buffer));
