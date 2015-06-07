@@ -20,8 +20,8 @@ namespace Common.DataContracts
         private long _id;
         private string _accountName;
         private string _passwordHash;
-        private UserProfile _profile;
         private bool _isAdmin;
+        private UserProfile _profile;
         
         /// <summary>
         /// Initializes a new instance of the <see cref="User"/> class.
