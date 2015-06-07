@@ -39,6 +39,7 @@ namespace Server.Console
             {
                 UnityContainerHolder.Initialize(container);
 
+                // TODO: Think on better Services creating in the host.
                 using (var host = new ServiceHost(typeof(RegistrationService)))
                 {
                     host.Open();
