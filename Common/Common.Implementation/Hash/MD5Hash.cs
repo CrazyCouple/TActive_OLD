@@ -42,7 +42,7 @@ namespace Common.Implementation.Hash
         /// <param name="hash">String representation of the MD5 hash.</param>
         public MD5Hash(string hash)
         {
-            hash.ValidateEmpty("hash");
+            hash.ValidateNullOrEmpty("hash");
 
             if (hash.Length != MD5HahsLength * 2)
             {

@@ -18,7 +18,9 @@ namespace Common.Implementation.Extensions
         /// </summary>
         /// <param name="source">String under test.</param>
         /// <param name="name">The name of the parameter that is under test.</param>
-        public static void ValidateEmpty(this string source, string name)
+        /// <exception cref="ArgumentNullException">In case if the string is NULL.</exception>
+        /// <exception cref="ArgumentException">In case if the string is empty or consists only of white-space characters.</exception>
+        public static void ValidateNullOrEmpty(this string source, string name)
         {
             source.ValidateNull(name);
 

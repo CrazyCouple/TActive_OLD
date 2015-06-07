@@ -19,7 +19,7 @@ namespace Common.Implementation.Tests.Extensions
         {
             string input = null;
 
-            input.ValidateEmpty("input");
+            input.ValidateNullOrEmpty("input");
         }
 
         [TestCase("")]
@@ -27,14 +27,14 @@ namespace Common.Implementation.Tests.Extensions
         [ExpectedException(typeof(ArgumentException))]
         public void ValidateEmpty_Empty_Throws(string input)
         {
-            input.ValidateEmpty("input");
+            input.ValidateNullOrEmpty("input");
         }
 
         [TestCase("Hello")]
         [TestCase(" good job ")]
         public void ValidateEmpty_Test(string input)
         {
-            input.ValidateEmpty("input");
+            input.ValidateNullOrEmpty("input");
         }
     }
 }

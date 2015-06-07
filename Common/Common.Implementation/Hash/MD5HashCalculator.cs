@@ -47,7 +47,7 @@ namespace Common.Implementation.Hash
         {
             ThrowIfDisposed();
 
-            input.ValidateEmpty("input");
+            input.ValidateNullOrEmpty("input");
 
             var buffer = System.Text.Encoding.ASCII.GetBytes(input);
             return new MD5Hash(_md5Algorithm.ComputeHash(buffer));

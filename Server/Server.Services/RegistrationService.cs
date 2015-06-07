@@ -66,8 +66,8 @@ namespace Server.Services
 
         private void ValidateCredentials(string accountName, string password)
         {
-            accountName.ValidateEmpty("accountName");
-            password.ValidateEmpty("password");
+            accountName.ValidateNullOrEmpty("accountName");
+            password.ValidateNullOrEmpty("password");
             
             if (password.Length < MinPasswordLength)
             {
