@@ -14,6 +14,7 @@ using Common.Implementation.IocInWCF;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using NLog;
+using Server.Console.TActiveClient;
 using Server.Services;
 
 namespace Server.Console
@@ -45,6 +46,12 @@ namespace Server.Console
                     host.Open();
 
                     System.Console.ReadLine();
+
+                    // TODO: Delete dummy call to the client.
+                    using (var client = new TestServiceClient(new WSHttpBinding(SecurityMode.Message), new EndpointAddress("http://localhost:8080/TestService")))
+                    {
+                        client.Hello();
+                    }
                 }
             }
 
