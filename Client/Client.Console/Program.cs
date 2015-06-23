@@ -7,6 +7,9 @@
 using System;
 using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
+using System.ServiceModel;
+using Client.Services;
+using Common.Implementation.IocInWCF;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using NLog;
@@ -31,6 +34,15 @@ namespace Client.Console
 
             using (var container = CreateUnityContainer())
             {
+                UnityContainerHolder.Initialize(container);
+
+                // TODO: Think on better Services creating in the host.
+                using (var host = new ServiceHost(typeof(TestService)))
+                {
+                    host.Open();
+
+                    System.Console.ReadLine();
+                }
             }
 
             LogManager.Flush();
